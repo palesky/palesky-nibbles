@@ -13,6 +13,7 @@
 #include "cocos2d.h"
 #include "SceneManager.hpp"
 #include "Snake.hpp"
+#include "Dot.hpp"
 #include "Joystick.hpp"
 #include <cmath>
 USING_NS_CC;
@@ -29,5 +30,6 @@ private:
     float height=3000;
     double mAnagle = 0;
     Snake * snake;
+    SpriteBatchNode * batch;
 };
 #endif /* AreaLayer_hpp */

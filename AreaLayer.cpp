@@ -11,18 +11,21 @@ bool AreaLayer::init(){
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
+    //设置背景板颜色
     this->initWithColor(Color4B(0, 100, 0, 255), width, height);
     
-    //猜测这一行和python的center是一样的，如有问题请删去，
-    //或查看python-cocos2的文档并修改
-    //this->setAnchorPoint(Vec2(visibleSize.width / 2,
-    //                          visibleSize.height / 2));
-    
+    //设置中心点到屏幕中央，那么每次初始化时，背景板都会居中显示
     this->setIgnoreAnchorPointForPosition(false);
     this->setAnchorPoint(Vec2(0.5,0.5));
     this->setPosition(Vec2(origin.x+visibleSize.width / 2 ,
                            origin.y+visibleSize.height / 2));
     
+    //未使用图片初始化，不知道会不会有问题
+    this->batch = SpriteBatchNode::create("");
+    
+    
+    
+    //设置joystick摇杆监听器
     auto _listener = EventListenerCustom::create(JoystickEvent::EVENT_JOYSTICK, [=](EventCustom* event){
         JoystickEvent* jsevent = static_cast<JoystickEvent*>(event->getUserData());
         log("--------------got joystick event, %p,  angle=%f", jsevent, jsevent->mAnagle);
@@ -30,13 +33,19 @@ bool AreaLayer::init(){
         // do your business you'd like to
     });
     _eventDispatcher->addEventListenerWithFixedPriority(_listener, 1);
+    
     schedule(CC_SCHEDULE_SELECTOR(AreaLayer::onUpdate), 1.0/60);
     
-    
+    //添加一条蛇
     snake = Snake::create();
     snake->setPosition(Vec2(width/2,
                             height/2));
     this->addChild(snake,1000);
+    
+    //添加一个点
+    Dot * d1 = Dot::create();
+    d1->setPosition(Vec2(origin.x+visibleSize.width/2,
+                         origin.y+visibleSize.height/2));
     
     
     

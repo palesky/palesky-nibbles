@@ -21,11 +21,15 @@ private:
     float angle ;
     float angleDest ;
     float speed ;
+    int score;
+    int length;
+//    Vector<Dot> body;
     Color3B color;
     bool isEnemy ;
     Sprite * head;
 public:
     bool addBody();
+    bool initBody();
     
     
 };
