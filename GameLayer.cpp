@@ -40,18 +40,13 @@ bool GameLayer::init(){
     this->addChild(rankingList,9999);
     
     //在屏幕中放上蛇运动的区域
-    auto areaLayer = new AreaLayer();
-    areaLayer->init();
-    this->addChild(areaLayer,50);
-    
-    auto snake =new Snake();
-    snake->init();
-    this->addChild(snake);
+    auto areaLayer = AreaLayer::create();
+    this->addChild(areaLayer,0);
     
     
     //放上触控球
     auto joystick = Joystick::create();
-    this->addChild(joystick, 100);
+    this->addChild(joystick, 9999);
     
 //    auto _listener = EventListenerCustom::create(JoystickEvent::EVENT_JOYSTICK, [=](EventCustom* event){
 //        JoystickEvent* jsevent = static_cast<JoystickEvent*>(event->getUserData());

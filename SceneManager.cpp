@@ -34,6 +34,8 @@ void SceneManager::goGameScene(){
     layer->tsm = this;
     gameScene->addChild(layer);
     
+    
+    
     Director::getInstance()->replaceScene(gameScene);
 }
 
@@ -42,6 +44,7 @@ void SceneManager::createScene(){
     scene = Scene::create();
     GameLayer * layer = GameLayer::create();
     layer->tsm = this;
+    
     scene->addChild(layer);
     
 }

@@ -28,5 +28,6 @@ private:
     float width=5000;
     float height=3000;
     double mAnagle = 0;
+    Snake * snake;
 };
 #endif /* AreaLayer_hpp */

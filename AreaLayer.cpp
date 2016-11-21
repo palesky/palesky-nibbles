@@ -23,28 +23,33 @@ bool AreaLayer::init(){
     this->setPosition(Vec2(origin.x+visibleSize.width / 2 ,
                            origin.y+visibleSize.height / 2));
     
-    Snake * snake = new Snake();
-    snake->init();
-    this->addChild(snake,1000);
-    
-    schedule(CC_SCHEDULE_SELECTOR(AreaLayer::onUpdate), 1.0/60);
-    
     auto _listener = EventListenerCustom::create(JoystickEvent::EVENT_JOYSTICK, [=](EventCustom* event){
         JoystickEvent* jsevent = static_cast<JoystickEvent*>(event->getUserData());
         log("--------------got joystick event, %p,  angle=%f", jsevent, jsevent->mAnagle);
         mAnagle=jsevent->mAnagle;
         // do your business you'd like to
     });
-     _eventDispatcher->addEventListenerWithFixedPriority(_listener, 1);
-
+    _eventDispatcher->addEventListenerWithFixedPriority(_listener, 1);
+    schedule(CC_SCHEDULE_SELECTOR(AreaLayer::onUpdate), 1.0/60);
+    
+    
+    snake = Snake::create();
+    snake->setPosition(Vec2(width/2,
+                            height/2));
+    this->addChild(snake,1000);
+    
+    
+    
+   
     
     return true;
 }
 
 void AreaLayer::onUpdate(float dt){
     //可能成为性能瓶颈
-    log("angle:%f",mAnagle);
-    log("x:%f y:%f",this->getPositionX()+140*sin(mAnagle),this->getPositionY()+140*cos(mAnagle));
-//    this->setPosition(this->getPositionX()+140*cos(mAnagle*3.1415926/180)/60,this->getPositionY()+140*sin(mAnagle*3.1415926/180)/60);
+//    log("angle:%f",mAnagle);
+//    log("x:%f y:%f",this->getPositionX()+140*sin(mAnagle),this->getPositionY()+140*cos(mAnagle));
+    this->setPosition(this->getPositionX()-140*cos(mAnagle*3.1415926/180)/60,this->getPositionY()-140*sin(mAnagle*3.1415926/180)/60);
+    snake->setPosition(snake->getPositionX()+140*cos(mAnagle*3.1415926/180)/60,snake->getPositionY()+140*sin(mAnagle*3.1415926/180)/60);
 
     }
