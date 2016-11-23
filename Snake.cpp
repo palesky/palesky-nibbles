@@ -30,7 +30,6 @@ bool Snake::init(){
     head->setScale(2);
     head->setAnchorPoint(Vec2(0.5,0.5));
     head->setColor(color);
-    log("head position:%f %f",head->getPositionX(),head->getPositionY());
     this->addChild(head,50);
     //添加眼珠
     Sprite * leye = new Sprite();
@@ -70,7 +69,7 @@ bool Snake::init(){
 bool Snake::addBody(){
     Sprite * d = Sprite::create("res/circle.png");
     d->setScale(1.5);
-    addChild(d);
+    this->addChild(d,50);
     body.pushBack(d);
 }
 
@@ -92,14 +91,11 @@ void Snake::onUpdate(float dt){
     head->setRotation(-angle);
     float dx = speed*cos(angle*3.1415926/180)/60;
     float dy = speed*sin(angle*3.1415926/180)/60;
-    float x = head->getPositionX()+speed*cos(angle*3.1415926/180)/60;
-    float y = head->getPositionY()+speed*sin(angle*3.1415926/180)/60;
+    float x = this->getPositionX()+speed*cos(angle*3.1415926/180)/60;
+    float y = this->getPositionY()+speed*sin(angle*3.1415926/180)/60;
     
-    head->setPosition(Vec2(x,y));
-    Vec2 parentVec2 = this->getParent()->getPosition();
-    log("snk  (%f,%f)",x,y);
-    log("area (%f,%f)",parentVec2.x,parentVec2.y);
-    this->getParent()->setPosition(Vec2(parentVec2.x-dx,parentVec2.y-dy));
+    this->setPosition(Vec2(x,y));
+    log("snake head (%f,%f)",x,y);
     
     path[size_path][0] = x;
     path[size_path][1] = y;
@@ -113,6 +109,7 @@ void Snake::onUpdate(float dt){
         Vec2 pos = Vec2(path[size_path-idx][0],
                         path[size_path-idx][1]);
         body.at(i)->setPosition(pos);
+        log("snake body %d (%f,%f)",i,pos.x,pos.y);
         if(body.at(i)->getPositionX() == 0)
             log("self.body[i].position %f",body.at(i)->getPositionX());
     }

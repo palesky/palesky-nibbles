@@ -34,7 +34,7 @@ bool AreaLayer::init(){
     });
     _eventDispatcher->addEventListenerWithFixedPriority(_listener, 1);
     
-    schedule(CC_SCHEDULE_SELECTOR(AreaLayer::onUpdate), 1.0/60);
+    schedule(CC_SCHEDULE_SELECTOR(AreaLayer::onUpdate));
     
     //添加一条蛇
     snake = Snake::create();
@@ -61,6 +61,14 @@ SpriteBatchNode * AreaLayer::getBatchNode(){
 
 void AreaLayer::onUpdate(float dt){
     //可能成为性能瓶颈
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    float ax = (origin.x+visibleSize.width+width)/2;
+    float ay = (origin.y+visibleSize.height+height)/2;
+    this->setPosition(Vec2(ax - snake->getPositionX(),
+                           ay - snake->getPositionY()));
+
 //    log("angle:%f",mAnagle);
 //    log("x:%f y:%f",this->getPositionX()+140*sin(mAnagle),this->getPositionY()+140*cos(mAnagle));
 //    this->setPosition(this->getPositionX()-140*cos(mAnagle*3.1415926/180)/60,this->getPositionY()-140*sin(mAnagle*3.1415926/180)/60);
