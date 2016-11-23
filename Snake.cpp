@@ -7,6 +7,7 @@
 //
 
 #include "Snake.hpp"
+#include "AreaLayer.hpp"
 bool Snake::init(){
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -27,7 +28,7 @@ bool Snake::init(){
     //添加头部
     head= new Sprite();
     head->initWithFile("res/circle.png");
-    head->setScale(2);
+    head->setScale(1.2);
     head->setAnchorPoint(Vec2(0.5,0.5));
     head->setColor(color);
     this->addChild(head,50);
@@ -46,11 +47,6 @@ bool Snake::init(){
     head->addChild(leye);
     head->addChild(reye);
     
-    //添加身体
-    for(int i = 0; i < length;i++){
-        addBody();
-    }
-    
     //设置joystick摇杆监听器
     auto _listener = EventListenerCustom::create(JoystickEvent::EVENT_JOYSTICK, [=](EventCustom* event){
         JoystickEvent* jsevent = static_cast<JoystickEvent*>(event->getUserData());
@@ -66,10 +62,19 @@ bool Snake::init(){
     return true;
 }
 
+bool Snake::initBody(){
+    //添加身体
+    for(int i = 0; i < length;i++){
+        addBody();
+    }
+}
+
 bool Snake::addBody(){
     Sprite * d = Sprite::create("res/circle.png");
-    d->setScale(1.5);
-    this->addChild(d,50);
+    d->setScale(1);
+    //在area中加入蛇的身体，此时蛇的的头和身体应该是相对于同一个坐标系运动
+    AreaLayer * al =(AreaLayer * )this->getParent();
+    al->addBodyDot2Batch(d);
     body.pushBack(d);
 }
 

@@ -24,6 +24,7 @@ public:
     void addEnemy();
     void onUpdate(float dt);
     SpriteBatchNode * getBatchNode();
+    void addBodyDot2Batch(Sprite * sprite);
 public:
     SceneManager * tsm;
     SpriteBatchNode * batch;

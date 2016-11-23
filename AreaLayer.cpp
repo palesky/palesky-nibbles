@@ -21,8 +21,8 @@ bool AreaLayer::init(){
                            origin.y+visibleSize.height / 2));
     
     //未使用图片初始化，不知道会不会有问题
-    this->batch = SpriteBatchNode::create("");
-    
+    this->batch = SpriteBatchNode::create("res/circle.png");
+    this->addChild(batch);
     
     
     //设置joystick摇杆监听器
@@ -41,6 +41,7 @@ bool AreaLayer::init(){
     snake->setPosition(Vec2(width/2,
                             height/2));
     this->addChild(snake,1000);
+    snake->initBody();
     
 //    //添加一个点
 //    Dot * d1 = Dot::create();
@@ -57,6 +58,10 @@ bool AreaLayer::init(){
 
 SpriteBatchNode * AreaLayer::getBatchNode(){
     return this->batch;
+}
+
+void AreaLayer::addBodyDot2Batch(cocos2d::Sprite *sprite){
+    batch->addChild(sprite);
 }
 
 void AreaLayer::onUpdate(float dt){
