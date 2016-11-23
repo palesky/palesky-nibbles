@@ -42,11 +42,12 @@ bool AreaLayer::init(){
                             height/2));
     this->addChild(snake,1000);
     
-    //添加一个点
-    Dot * d1 = Dot::create();
-    d1->setPosition(Vec2(origin.x+visibleSize.width/2,
-                         origin.y+visibleSize.height/2));
-    
+//    //添加一个点
+//    Dot * d1 = Dot::create();
+//    d1->setPosition(Vec2(width/2,
+//                         height/2));
+//    d1->setPositionZ(10000);
+//    
     
     
    
@@ -54,11 +55,14 @@ bool AreaLayer::init(){
     return true;
 }
 
+SpriteBatchNode * AreaLayer::getBatchNode(){
+    return this->batch;
+}
+
 void AreaLayer::onUpdate(float dt){
     //可能成为性能瓶颈
 //    log("angle:%f",mAnagle);
 //    log("x:%f y:%f",this->getPositionX()+140*sin(mAnagle),this->getPositionY()+140*cos(mAnagle));
-    this->setPosition(this->getPositionX()-140*cos(mAnagle*3.1415926/180)/60,this->getPositionY()-140*sin(mAnagle*3.1415926/180)/60);
-    snake->setPosition(snake->getPositionX()+140*cos(mAnagle*3.1415926/180)/60,snake->getPositionY()+140*sin(mAnagle*3.1415926/180)/60);
+//    this->setPosition(this->getPositionX()-140*cos(mAnagle*3.1415926/180)/60,this->getPositionY()-140*sin(mAnagle*3.1415926/180)/60);
 
     }

@@ -16,7 +16,7 @@ private:
     JoystickEvent();
     
 public:
-    CREATE_FUNC(JoystickEvent)
+    CREATE_FUNC(JoystickEvent);
     virtual ~JoystickEvent();
     virtual bool init();
     ;

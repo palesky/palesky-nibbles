@@ -14,6 +14,7 @@
 #include "SceneManager.hpp"
 #include "AreaLayer.hpp"
 #include "Joystick.hpp"
+#include "GameOverLayer.hpp"
 USING_NS_CC;
 class GameLayer:public Layer{
 public:

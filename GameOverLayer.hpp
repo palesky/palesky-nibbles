@@ -14,6 +14,7 @@
 USING_NS_CC;
 class GameOverLayer:public LayerColor{
 public:
+    CREATE_FUNC(GameOverLayer);
     virtual bool init();
 };
 #endif /* GameOverLayer_hpp */

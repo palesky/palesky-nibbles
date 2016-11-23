@@ -23,13 +23,14 @@ public:
     virtual bool init();
     void addEnemy();
     void onUpdate(float dt);
+    SpriteBatchNode * getBatchNode();
 public:
     SceneManager * tsm;
+    SpriteBatchNode * batch;
 private:
     float width=5000;
     float height=3000;
     double mAnagle = 0;
     Snake * snake;
-    SpriteBatchNode * batch;
 };
 #endif /* AreaLayer_hpp */

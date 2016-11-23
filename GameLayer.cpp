@@ -39,7 +39,17 @@ bool GameLayer::init(){
                           origin.y + visibleSize.height));
     this->addChild(rankingList,9999);
     
-    //在屏幕中放上蛇运动的区域
+//    //放上gameover
+//    auto gameover = GameOverLayer::create();
+//    gameover->setPosition(Vec2(origin.x + visibleSize.width/2,
+//                               origin.y + visibleSize.height/2));
+//    gameover->setVisible(true);
+//    this->setColor(Color3B(100,100,100));
+//    this->addChild(gameover,100);
+    
+    
+    
+//    在屏幕中放上蛇运动的区域
     auto areaLayer = AreaLayer::create();
     this->addChild(areaLayer,0);
     
